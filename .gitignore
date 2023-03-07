@@ -1,9 +1,4 @@
 **/.ipynb_checkpoints
-*.png
-*.mp4
-*.npy
-*.npz
-*.dae
 dataset/*
 logs/*
 logs_tb/*
