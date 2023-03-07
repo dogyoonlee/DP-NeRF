@@ -29,18 +29,18 @@ pip install -r requirements.txt
 ```
 <details>
   <summary> Dependencies (click to expand) </summary>
-   - numpy
-   - scikit-image
-   - torch>=1.8
-   - torchvision>=0.9.1
-   - imageio
-   - imageio-ffmpeg
-   - matplotlib
-   - configargparse
-   - tensorboardX>=2.0
-   - opencv-python
-   - einops
-   - tensorboard
+  <li>numpy
+  <li>scikit-image
+  <li>torch>=1.8
+  <li>torchvision>=0.9.1
+  <li>imageio
+  <li>imageio-ffmpeg
+  <li>matplotlib
+  <li>configargparse
+  <li>tensorboardX>=2.0
+  <li>opencv-python
+  <li>einops
+  <li>tensorboard
 </details>
 
 
@@ -58,12 +58,14 @@ You must change the `basedir`, `datadir`, and `tbdir`.
 
 <details>
   <summary> Training Options (click to expand) </summary>
-  - expname: name of the experiment.
-  - rbk_use_origin: use origin ray to train the RBK. Default to use.
-  - rbk_num_motion: the number of rigid motion. k in the paper.
-  - use_dpnerf: use rigid blurring kernel.
-  - use_awp: use adaptive weight proposal.
-  - use_coarse_to_fine_opt: use coarse-to-fine optimization.
+  <ul>
+  <li>expname: name of the experiment.
+  <li>rbk_use_origin: use origin ray to train the RBK. Default to use.
+  <li>rbk_num_motion: the number of rigid motion. k in the paper.
+  <li>use_dpnerf: use rigid blurring kernel.
+  <li>use_awp: use adaptive weight proposal.
+  <li>use_coarse_to_fine_opt: use coarse-to-fine optimization.
+  </ul>
 </details>
 
 ## 4. Train
