@@ -1,0 +1,59 @@
+num_gpu = 1
+expname = defocussausage1_full_wodepth_woprior
+basedir = ./logs
+datadir = ./dataset/deblurnerf_dataset/real_defocus_blur/defocussausage
+tbdir = ./logs_tb
+dataset_type = llff
+
+factor = 4
+llffhold = 6
+
+N_rand = 1024
+N_samples = 64
+N_importance = 64
+N_iters = 200000
+lrate = 5e-4
+lrate_decay = 250
+
+use_viewdirs = True
+raw_noise_std = 1e0
+rgb_activate = sigmoid
+
+blur_model_type = dpnerf
+
+kernel_start_iter = 1200
+tone_mapping_type = gamma
+render_rmnearplane = 30
+
+use_dpnerf
+
+rbk_use_viewdirs
+rbk_use_view_embed
+rbk_view_embed_ch = 64
+
+rbk_use_origin
+rbk_num_motion = 4
+rbk_enc_brc_depth = 4
+rbk_enc_brc_width = 64
+rbk_enc_brc_skips = 4
+rbk_se_r_depth = 1
+rbk_se_r_width = 32
+rbk_se_r_output_ch = 3
+rbk_se_v_depth = 1
+rbk_se_v_width = 32
+rbk_se_v_output_ch = 3
+rbk_ccw_depth = 1
+rbk_ccw_width = 32
+rbk_se_rv_window = 0.1
+
+use_awp
+awp_sam_emb_depth=4
+awp_sam_emb_width=64
+awp_mot_emb_depth=1
+awp_mot_emb_width=32
+awp_dir_freq=2
+awp_rgb_freq=2
+awp_depth_freq=3
+awp_ray_dir_freq=2
+
+use_coarse_to_fine_opt
