@@ -3,13 +3,9 @@ dataset/*
 logs/*
 logs_tb/*
 
-**/__pycache__/
-**/**/__pycache__
-**/**/**/__pycache__
-**/**/**/**/__pycache__
+*/__pycache__/
 .vscode/
-.DS_Store/
 *.ipynb
+*/.DS_Store/
 
 dataset/
-wandb/

@@ -2,13 +2,13 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from run_dpnerf_helpers import *
-from mam import *
+from utils.run_dpnerf_helpers import *
+from models.mam import *
 import os
 import imageio
 import time
 import math
-import rigid_warping
+import utils.rigid_warping as rigid_warping
 
 HALF_PIX = 0.5
 

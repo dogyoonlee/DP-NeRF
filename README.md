@@ -122,7 +122,7 @@ You can visualize the warped rays in specific image index using following comman
 Note that, you should modify the code of plotting rays in [here](https://github.com/dogyoonlee/DP-NeRF/blob/main/warped_rays_vis.py#L347) of `warped_rays_vis.py` correponding to your trained model (`rbk_num_motion`) in saved checkpoint.
 
 ```
-python run_dpnerf.py --config ./configs/blurpool/tx_blurpool_dpnerf.txt --expname $dir_to_log --ft_path ./<basedir>/<expname>/200000.tar --save_warped_ray_img --warped_rays_path $warped_ray_saved_dir/rays_warped.npy
+python warped_rays_vis.py --config ./configs/blurpool/tx_blurpool_dpnerf.txt --warped_rays_path $warped_ray_saved_dir/rays_warped.npy
 ```
 
 # Notes

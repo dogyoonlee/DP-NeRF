@@ -8,9 +8,10 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 # from NeRF import *
 # from NeRF_cbnet import *
-from load_llff import load_llff_data
-from run_dpnerf_helpers import *
-from metrics import compute_img_metric
+# import pdb;pdb.set_trace()
+from data_utils.load_llff import load_llff_data
+from utils.run_dpnerf_helpers import *
+from utils.metrics import compute_img_metric
 
 def config_parser():
     import configargparse

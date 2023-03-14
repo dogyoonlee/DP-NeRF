@@ -6,10 +6,10 @@ import imageio
 from tensorboardX import SummaryWriter
 
 # from NeRF import *
-from dpnerf import *
-from load_llff import load_llff_data
-from run_dpnerf_helpers import *
-from metrics import compute_img_metric
+from models.dpnerf import *
+from data_utils.load_llff import load_llff_data
+from utils.run_dpnerf_helpers import *
+from utils.metrics import compute_img_metric
 from PIL import Image as PILImage
 
 # np.random.seed(0)
