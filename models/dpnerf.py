@@ -38,9 +38,10 @@ class Rigid_Blurring_Kernel(nn.Module):
     def __init__(self, D, W, D_r, W_r, D_v, W_v, D_w, W_w,
                  output_ch_r, output_ch_v, input_ch, skips, rv_window, 
                  num_motion=2, near=0.0, far=1.0, ndc=False, warp_field=None, view_embedding_layer=None,
-                 use_origin=True):
+                 use_origin=True, use_awp=False):
         super(Rigid_Blurring_Kernel, self).__init__()
         
+        self.use_awp = use_awp
         self.input_ch = input_ch
         self.skips = skips
         self.view_embedding_layer = view_embedding_layer
@@ -149,8 +150,11 @@ class Rigid_Blurring_Kernel(nn.Module):
         
         new_rays = self.rbk_warp(rays, r, v)
         new_rays = new_rays.reshape(-1, 3, 2)
-    
-        return new_rays, w, view_feature
+        
+        if self.use_awp:
+            return new_rays, w, view_feature
+        else:
+            return new_rays, w
     
 class Adaptive_Weight_Proposal(nn.Module):
     # DBK - Weight Proposal Network
@@ -281,7 +285,7 @@ class RBK_AWP(nn.Module):
                            D_w=D_rbk_w, W_w=W_rbk_w, rv_window=rbk_se_rv_window,
                            view_embedding_layer=self.view_embed_layer, use_origin=rbk_use_origin, 
                            input_ch=self.view_embed_ch, skips=skips_rbk, near=near, far=far, ndc=ndc, 
-                           warp_field=self.SE3Field)
+                           warp_field=self.SE3Field, use_awp=self.use_awp)
         
         self.AWPnet = Adaptive_Weight_Proposal(input_ch=input_ch_awp, D_sam=D_awp_sam, W_sam=W_awp_sam, 
                                                D_mot=D_awp_mot, W_mot=W_awp_mot, view_embedding_layer=self.view_embed_layer,
