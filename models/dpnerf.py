@@ -583,8 +583,6 @@ class NeRFAll(nn.Module):
                         ccw_fine = ccw_fine + ccw_fine * self.AWPnet.ccw_fine_scale
                         ccw_fine = ccw_fine/(torch.sum(ccw_fine, -1, keepdims=True))
                     
-                    use_rgb_fine_scale_loss = True
-                    if use_rgb_fine_scale_loss:    
                         rgb_fine = rgb.clone()
                         depth_fine = depth.clone()
                         acc_fine = acc.clone()
@@ -595,7 +593,7 @@ class NeRFAll(nn.Module):
                         
                     else:
                         rgb, depth, acc, extras = self.mlp_rbk.rbk_weighted_sum(rgb, depth, acc, extras, ccw)
-                        return self.tonemapping(rgb), self.tonemapping(extras['rgb0']), {}
+                        return self.tonemapping(rgb), self.tonemapping(extras['rgb0']), 
                         
                 else:
                     rgb, depth, acc, extras = self.render(H, W, K, chunk, rays, **kwargs)
