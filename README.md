@@ -105,7 +105,7 @@ The evaluation result of the provided sample weight is as follows:
     <td class="tg-0pky"></td>
     <td class="tg-c3ow" colspan=""><span style="font-weight:400;font-style:normal">PNSR</span></td>
     <td class="tg-c3ow" colspan=""><span style="font-weight:400;font-style:normal">SSIM</span></td>
-    <td class="tg-c3ow" colspan=""><span style="font-weight:400;font-style:normal">SSIM</span></td>
+    <td class="tg-c3ow" colspan=""><span style="font-weight:400;font-style:normal">LPIPS</span></td>
   </tr>
   <tr>
     <td class="tg-0pky">Blurpool(paper)</td>
