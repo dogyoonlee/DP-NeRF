@@ -77,7 +77,7 @@ python run_dpnerf.py --config ./configs/blurpool/tx_blurpool_dpnerf.txt --expnam
 ```
 The training and tensorboard results will be save in `<basedir>/<expname>` and `<tbdir>`.
 
-## 4. Evalaution
+## 5. Evaluation
 
 Evaluation is automatically executed every `--i_testset` iterations.
 Please refer the other logging options in `run_dpnerf.py` to adjust save and print the results.
@@ -85,8 +85,43 @@ Please refer the other logging options in `run_dpnerf.py` to adjust save and pri
 After the training, execute the evaluation results following command.
 For example, to evaluate `blurpool` scene after 200000 iteration,
 ```
-python run_dpnerf.py --config ./configs/blurpool/tx_blurpool_dpnerf.txt --expname $dir_to_log --ft_path ./<basedir>/<expname>/200000.tar 
+python run_dpnerf.py --config ./configs/blurpool/tx_blurpool_dpnerf.txt --expname $dir_to_log --ft_path ./<basedir>/<expname>/200000.tar --render_only --render_test
 ```
+
+
+# Pretrained Weights
+We additionally provide the pretrained weight sample for `blurpool` scene in [here](https://github.com/dogyoonlee/DP-NeRF/pretrained_weights/blurpool).
+
+We cannot provide the pretrained weights for full scene since we did refactoring on the code after submit our work on the conference.
+
+Hence, we trained our model again for `blurpool` scene.
+
+The evaluation result of the provided sample weight is as follows:
+
+<table class="tg">
+
+<tbody>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-c3ow" colspan=""><span style="font-weight:400;font-style:normal">PNSR</span></td>
+    <td class="tg-c3ow" colspan=""><span style="font-weight:400;font-style:normal">SSIM</span></td>
+    <td class="tg-c3ow" colspan=""><span style="font-weight:400;font-style:normal">SSIM</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Blurpool(paper)</td>
+    <td class="tg-c3ow"><span style="font-weight:400;font-style:normal">31.96</span></td>
+    <td class="tg-c3ow"><span style="font-weight:400;font-style:normal">0.8768</span></td>
+    <td class="tg-c3ow"><span style="font-weight:400;font-style:normal">0.0908</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Blurpool(provided weight)</td>
+    <td class="tg-c3ow"><span style="font-weight:400;font-style:normal">32.04</span></td>
+    <td class="tg-c3ow"><span style="font-weight:400;font-style:normal">0.8754</span></td>
+    <td class="tg-c3ow"><span style="font-weight:400;font-style:normal">0.0873</span></td>
+  </tr>
+</tbody>
+</table>
+
 
 # Visualization
 You can render or save the results after 200000 iteration of training following process.

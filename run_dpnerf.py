@@ -281,7 +281,7 @@ def train():
     imagesf = images
     images = (images * 255).astype(np.uint8)
     images_idx = np.arange(0, len(images))
-
+    
     # Cast intrinsics to right types
     H, W, focal = hwf
     H, W = int(H), int(W)
@@ -499,6 +499,22 @@ def train():
                 for rgb_idx, rgb8 in enumerate(rgbs):
                     imageio.imwrite(os.path.join(testsavedir, f'{rgb_idx:03d}.png'), rgb8)
                     imageio.imwrite(os.path.join(testsavedir, f'{rgb_idx:03d}_disp.png'), disps[rgb_idx])
+                
+                # evaluation
+                rgbs_test = torch.tensor(rgbshdr).cuda()
+                imagesf = torch.tensor(imagesf).cuda()
+                rgbs_test = rgbs_test[i_test]
+                target_rgb_gt = imagesf[i_test]
+                test_mse = compute_img_metric(rgbs_test, target_rgb_gt, 'mse')
+                test_psnr = compute_img_metric(rgbs_test, target_rgb_gt, 'psnr')
+                test_ssim = compute_img_metric(rgbs_test, target_rgb_gt, 'ssim')
+                test_lpips = compute_img_metric(rgbs_test, target_rgb_gt, 'lpips')
+                if isinstance(test_lpips, torch.Tensor):
+                    test_lpips = test_lpips.item()
+
+                with open(test_metric_file, 'a') as outfile:
+                    outfile.write(f"**[Evaluation]** : PSNR:{test_psnr:.8f} SSIM:{test_ssim:.8f} LPIPS:{test_lpips:.8f}\n")
+                    print(f"**[Evaluation]** : PSNR:{test_psnr:.8f} SSIM:{test_ssim:.8f} LPIPS:{test_lpips:.8f}")
             else:
                 prefix = 'epi_' if args.render_epi else ''
                 imageio.mimwrite(os.path.join(testsavedir, f'{prefix}video.mp4'), rgbs, fps=30, quality=9)
@@ -654,6 +670,7 @@ def train():
             moviebase = os.path.join(basedir, expname, '{}_spiral_{:06d}_'.format(expname, i))
             rgbs = (rgbs - rgbs.min()) / (rgbs.max() - rgbs.min())
             rgbs = rgbs.cpu().numpy()
+            # disps = (1. - disps)
             disps = disps.cpu().numpy()
             # disps_max_idx = idnt(disps.size * 0.9)
             # disps_max = disps.reshape(-1)[np.argpartition(disps.reshape(-1), disps_max_idx)[disps_max_idx]]
@@ -676,9 +693,6 @@ def train():
             dummy_poses = torch.eye(3, 4).unsqueeze(0).expand(dummy_num, 3, 4).type_as(render_poses)
             print(f"Append {dummy_num} # of poses to fill all the GPUs")
             
-            example_images = []
-            example_error_images = []
-            example_gt_images = []
             with torch.no_grad():
                 nerf.eval()
                 rgbs, _ = nerf(H, W, K, args.chunk, poses=torch.cat([poses, dummy_poses], dim=0).cuda(),
@@ -706,12 +720,6 @@ def train():
                 tensorboard.add_scalar("Test PSNR", test_psnr, global_step)
                 tensorboard.add_scalar("Test SSIM", test_ssim, global_step)
                 tensorboard.add_scalar("Test LPIPS", test_lpips, global_step)
-
-                for test_view_idx, test_imgs in enumerate(rgbs):
-                    rgbs_error_map = torch.mean((test_imgs-target_rgb_gt[test_view_idx])**2, dim=-1)
-                    rgbs_error_map = to8b((rgbs_error_map/torch.max(rgbs_error_map)).detach().cpu().numpy())
-                    rgbs_error_map = cv2.cvtColor(cv2.applyColorMap(rgbs_error_map, cv2.COLORMAP_HOT), cv2.COLOR_BGR2RGB)
-                    
                 
             with open(test_metric_file, 'a') as outfile:
                 outfile.write(f"iter{i}/globalstep{global_step}: MSE:{test_mse:.8f} PSNR:{test_psnr:.8f}"
