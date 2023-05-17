@@ -5,12 +5,12 @@
 We propose DP-NeRF, a novel neural radiance field (NeRF) framework, that reconstructs the clean 3D scene from blurry images applying rigid blurring kernel (RBK) based on physical scene priors.
 We impose the physical constraints on the blurring kernel of neural radiance field inspired by the in-camera blurring process during image acquisition on the 3D scene.
 
-<!-- - [[CVPR paper Link]]()
-
-- [[CVPR supplementary Link]]() -->
-
 - [[Project Page]](https://dogyoonlee.github.io/dpnerf/)
   
+- [[CVPR paper link]](https://openaccess.thecvf.com/content/CVPR2023/papers/Lee_DP-NeRF_Deblurred_Neural_Radiance_Field_With_Physical_Scene_Priors_CVPR_2023_paper.pdf)
+
+- [[CVPR suppelementary paper link]](https://openaccess.thecvf.com/content/CVPR2023/supplemental/Lee_DP-NeRF_Deblurred_Neural_CVPR_2023_supplemental.pdf)
+
 - [[arXiv paper link]](https://arxiv.org/pdf/2211.12046.pdf)
 
 
@@ -186,6 +186,15 @@ MIT License
 If you find our work useful in your research, please consider citing:
 
 ```
+@InProceedings{Lee_2023_CVPR,
+    author    = {Lee, Dogyoon and Lee, Minhyeok and Shin, Chajin and Lee, Sangyoun},
+    title     = {DP-NeRF: Deblurred Neural Radiance Field With Physical Scene Priors},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {12386-12396}
+}
+
 @article{lee2022deblurred,
   title={Deblurred Neural Radiance Field with Physical Scene Priors},
   author={Lee, Dogyoon and Lee, Minhyeok and Shin, Chajin and Lee, Sangyoun},
