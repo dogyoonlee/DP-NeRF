@@ -90,7 +90,7 @@ python run_dpnerf.py --config ./configs/blurpool/tx_blurpool_dpnerf.txt --expnam
 
 
 # Pretrained Weights
-We additionally provide the pretrained weight sample for `blurpool` scene in [here](https://github.com/dogyoonlee/DP-NeRF/tree/main/pretrained_weights/blurpool).
+We additionally provide the pretrained weight sample for `blurpool` scene in [here](https://github.com/dogyoonlee/DP-NeRF/tree/main/pretrained/blurpool).
 
 We cannot provide the pretrained weights for full scene since we did refactoring on the code after submit our work on the conference.
 
